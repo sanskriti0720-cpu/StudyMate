@@ -1,0 +1,287 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyMate | Level Up Your Learning</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+    <aside class="sidebar">
+        <div class="logo">✦ StudyMate</div>
+
+        <div class="player">
+            <div class="avatar">S</div>
+            <h3>Student Player</h3>
+            <p id="levelLabel">LEVEL 1</p>
+        </div>
+
+        <nav>
+            <a href="#dashboard">⌂ Dashboard</a>
+            <a href="#tasks">▣ Missions</a>
+            <a href="#focus">◷ Focus Arena</a>
+            <a href="#challenges">⚡ Daily Challenges</a>
+            <a href="#analytics">▥ Analytics</a>
+            <a href="#calendar">▦ Study Calendar</a>
+            <a href="#achievements">🏆 Achievements</a>
+        </nav>
+
+        <div class="sidebar-note">
+            <p>YOUR MOTTO</p>
+            <h3>Consistency beats motivation.</h3>
+        </div>
+    </aside>
+
+    <main class="main-content" id="dashboard">
+
+        <header class="topbar">
+            <div>
+                <p class="eyebrow">YOUR PERSONAL LEARNING SPACE</p>
+                <h1>Welcome back, Champion!</h1>
+                <p id="todayDate"></p>
+            </div>
+            <div class="streak">🔥 <span id="streakCount">0</span> Day Streak</div>
+        </header>
+
+        <section class="hero">
+            <div>
+                <span class="tag">PLAYER DASHBOARD</span>
+                <h2>Every mission takes you closer to your goal.</h2>
+                <p>Complete tasks, earn XP and level up your learning journey.</p>
+                <a href="#tasks" class="hero-link">Explore Missions →</a>
+            </div>
+            <div class="hero-symbol">✦</div>
+        </section>
+
+        <section class="stats">
+            <div class="stat-card">
+                <span>⚡ TOTAL XP</span>
+                <h2 id="xpCount">0</h2>
+                <p>Experience points</p>
+            </div>
+            <div class="stat-card">
+                <span>📚 TOTAL MISSIONS</span>
+                <h2 id="totalTasks">0</h2>
+                <p>All study tasks</p>
+            </div>
+            <div class="stat-card">
+                <span>✅ COMPLETED</span>
+                <h2 id="completedTasks">0</h2>
+                <p>Missions accomplished</p>
+            </div>
+            <div class="stat-card">
+                <span>⏳ PENDING</span>
+                <h2 id="pendingTasks">0</h2>
+                <p>Still waiting for you</p>
+            </div>
+        </section>
+
+        <section class="level-panel">
+            <div class="level-top">
+                <div>
+                    <p class="eyebrow">YOUR PLAYER RANK</p>
+                    <h2 id="rankName">Beginner Explorer</h2>
+                </div>
+                <h2 id="levelNumber">LVL 1</h2>
+            </div>
+            <div class="progress-track">
+                <div id="levelFill"></div>
+            </div>
+            <p id="levelProgress">0 / 100 XP to next level</p>
+        </section>
+
+        <section class="two-column">
+
+            <div class="panel" id="focus">
+                <div class="section-title">
+                    <div>
+                        <p class="eyebrow">TIME TO CONCENTRATE</p>
+                        <h2>Focus Arena</h2>
+                    </div>
+                    <span class="live-tag">● LIVE</span>
+                </div>
+
+                <div class="timer-ring">
+                    <div class="timer-inner">
+                        <h2 id="timer">25:00</h2>
+                        <p id="timerMode">FOCUS SESSION</p>
+                    </div>
+                </div>
+
+                <div class="timer-buttons">
+                    <button class="primary-btn" id="startBtn" onclick="startTimer()">▶ Start</button>
+                    <button class="secondary-btn" onclick="pauseTimer()">Ⅱ Pause</button>
+                    <button class="secondary-btn" onclick="resetTimer()">↻ Reset</button>
+                </div>
+
+                <button class="break-btn" onclick="startBreak()">☕ Start 5 Min Break</button>
+
+                <div class="session-info">
+                    <span>Completed sessions</span>
+                    <strong id="sessionCount">0</strong>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="section-title">
+                    <div>
+                        <p class="eyebrow">DAILY TARGET</p>
+                        <h2>Daily Study Goal</h2>
+                    </div>
+                    <span>🎯</span>
+                </div>
+
+                <div class="goal-number" id="goalMinutes">0</div>
+                <p class="muted">Study minutes completed today</p>
+
+                <div class="progress-track goal-track">
+                    <div id="goalFill"></div>
+                </div>
+                <p id="goalText">0 / 180 minutes</p>
+
+                <label for="goalInput">Set daily goal (minutes)</label>
+                <div class="goal-input">
+                    <input type="number" id="goalInput" min="1" max="1440" value="180">
+                    <button onclick="saveGoal()">Save</button>
+                </div>
+
+                <div class="suggestion">
+                    <p class="eyebrow">SMART MISSION ADVISOR</p>
+                    <h3>What should I study next?</h3>
+                    <p id="suggestionText">Your next mission will appear here.</p>
+                    <button class="secondary-btn" onclick="suggestTask()">Suggest Next Mission →</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="panel" id="challenges">
+            <div class="section-title">
+                <div>
+                    <p class="eyebrow">TODAY'S SPECIAL MISSIONS</p>
+                    <h2>Daily Challenges</h2>
+                </div>
+                <span>⚡</span>
+            </div>
+
+            <div class="challenge-grid">
+                <div class="challenge-card">
+                    <div class="challenge-icon">🎯</div>
+                    <h3>Mission Master</h3>
+                    <p>Complete 3 study tasks today.</p>
+                    <div class="mini-track"><div id="taskChallengeFill"></div></div>
+                    <p id="taskChallengeText">0 / 3 completed</p>
+                </div>
+
+                <div class="challenge-card">
+                    <div class="challenge-icon">🧠</div>
+                    <h3>Deep Focus</h3>
+                    <p>Complete 2 focus sessions today.</p>
+                    <div class="mini-track"><div id="focusChallengeFill"></div></div>
+                    <p id="focusChallengeText">0 / 2 completed</p>
+                </div>
+            </div>
+
+            <p class="challenge-reward" id="challengeReward">
+                Complete both challenges to claim your bonus 50 XP!
+            </p>
+        </section>
+
+        <section class="panel" id="analytics">
+            <div class="section-title">
+                <div>
+                    <p class="eyebrow">YOUR LAST 7 DAYS</p>
+                    <h2>Weekly Performance</h2>
+                </div>
+                <span>📊</span>
+            </div>
+
+            <div class="analytics-summary">
+                <div>
+                    <p>Total focus time</p>
+                    <h2 id="weeklyMinutes">0 min</h2>
+                </div>
+                <div>
+                    <p>Tasks completed</p>
+                    <h2 id="weeklyTasks">0</h2>
+                </div>
+            </div>
+
+            <div id="weeklyChart" class="weekly-chart"></div>
+            <p class="chart-caption">Focus minutes per day</p>
+        </section>
+
+        <section class="panel" id="calendar">
+            <div class="section-title">
+                <div>
+                    <p class="eyebrow">YOUR STUDY HISTORY</p>
+                    <h2>Study Calendar</h2>
+                </div>
+                <span>🗓️</span>
+            </div>
+
+            <div class="calendar-header">
+                <button class="secondary-btn" onclick="changeMonth(-1)">←</button>
+                <h3 id="calendarMonth"></h3>
+                <button class="secondary-btn" onclick="changeMonth(1)">→</button>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid"></div>
+            <p class="calendar-legend">● Study activity recorded</p>
+            <p id="calendarDetails" class="calendar-details">Select a date to see your study activity.</p>
+        </section>
+
+        <section class="panel missions" id="tasks">
+            <div class="section-title">
+                <div>
+                    <p class="eyebrow">YOUR LEARNING JOURNEY</p>
+                    <h2>Mission Control</h2>
+                </div>
+                <span>⚔</span>
+            </div>
+
+            <div class="task-form">
+                <input id="taskInput" type="text" placeholder="Enter your next mission...">
+                <select id="priorityInput">
+                    <option value="High">High Priority</option>
+                    <option value="Medium" selected>Medium Priority</option>
+                    <option value="Low">Low Priority</option>
+                </select>
+                <button class="primary-btn" onclick="addTask()">+ Add Mission</button>
+            </div>
+
+            <input id="searchInput" class="search-box" type="text"
+                placeholder="🔍 Search missions..." oninput="displayTasks()">
+
+            <div class="filters">
+                <button class="filter-btn active" onclick="setFilter('all',this)">All</button>
+                <button class="filter-btn" onclick="setFilter('pending',this)">Active</button>
+                <button class="filter-btn" onclick="setFilter('completed',this)">Completed</button>
+            </div>
+
+            <div id="taskList"></div>
+            <p id="emptyMessage">No missions found. Create your first mission!</p>
+        </section>
+
+        <section class="panel achievements" id="achievements">
+            <div class="section-title">
+                <div>
+                    <p class="eyebrow">REWARDS & MILESTONES</p>
+                    <h2>Achievement Gallery</h2>
+                </div>
+                <span>🏆</span>
+            </div>
+            <div class="badges-grid" id="badgesGrid"></div>
+        </section>
+
+        <footer>StudyMate © 2026 | Learn • Focus • Level Up</footer>
+
+    </main>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
